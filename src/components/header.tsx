@@ -1,14 +1,31 @@
 "use client";
+
+import appSelector from "@/lib/features/appSelector";
+import { increment, openModal, startAddNewNote } from "@/lib/features/appSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import Image from "next/image";
+
 //-ml-[100px] -mr-[100px]
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const value = useAppSelector(appSelector.getCount);
+  const handleClick = () => dispatch(openModal());
+
   return (
-    <header className="-ml-[60px] -mr-[100px]">
+    <header className='-ml-[60px] -mr-[100px]'>
       <div className='navbar bg-base-100   '>
         <div className='flex-1  align-baseline '>
           <a className=' font-bold  text-xl text-black'>noteTaker</a>
-          <a className='   btn text-xl ml-[100px] text-black' > + Add Note</a>
-          {/* <a className='btn  btn-nav text-xl text-black'>noteTaker</a> */}
+          <a
+            className='   btn text-xl ml-[100px] text-black'
+            onClick={handleClick}>
+            + Add Note
+          </a>
+          <a className='   btn text-xl ml-[100px] text-black'>
+            Note count: {value}
+          </a>
 
+          {/* <a className='btn  btn-nav text-xl text-black'>noteTaker</a> */}
         </div>
         <div className='flex-none gap-2'>
           <div className='form-control  text-primary'>
